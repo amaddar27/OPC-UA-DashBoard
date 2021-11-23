@@ -6,7 +6,7 @@ def gen_body(name, util):
     body = dbc.CardBody(
         [
             html.Div(
-                dbc.Button(name, color="secondary", style={"margin-bottom": "20px"}),
+                dbc.Button(name, id='button'+name, value=name, color="secondary", style={"margin-bottom": "20px"}),
                 className="d-grid gap-2"
             ),
             # html.P('\n'),
