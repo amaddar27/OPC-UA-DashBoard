@@ -21,9 +21,9 @@ def gen_body(name, util):
 
 def get_style(name):
     if name == 'X10' or name == 'X9':
-        return {"width": "9rem", 'height': '7rem'}  # css styling
+        return {"width": "8rem", 'height': '7rem'}  # css styling
     else:
-        return {"width": "9rem", 'height': '7rem', "margin-bottom": "20px"}
+        return {"width": "8rem", 'height': '7rem', "margin-bottom": "20px"}
 
 
 def gen_card(name, util):

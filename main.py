@@ -9,25 +9,33 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 HEADER_STYLE = {
     "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "right": 0,
-    #"height": '10%',
-    #"padding": "2rem 1rem",
-    #"background-color": "white",
+    "top": '2%',
+    "left": '1%',
+    "right": '1%',
+    "background": "cyan",
+    'overflow': 'auto'
 }
 
 
 SIDEBAR_STYLE = {
-    #"position": "fixed",
-    #"top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "25%",
+    "position": "fixed",
+    "top": '14%',
+    "left": '1%',
+    "bottom": '2%',
+    "width": "22%",
     "padding": "1rem ",
-    #"background-color": "#f8f9fa",
-    'bakcground-colo': 'black',
-    "overflow": "scroll",
+    'background': 'cyan',
+    "overflow": "auto",
+}
+
+MAINSPACE_STYLE = {
+                'position': 'fixed',
+                'top': '14%',
+                'width': '75%',
+                'right': '1%',
+                'bottom': '2%',
+                'background-color': 'cyan',
+                "overflow": "auto"
 }
 
 # ----------------------------------CARDS--------------------------------------------
@@ -42,8 +50,6 @@ X8 = gen_card(name='X8', util=27)
 X9 = gen_card(name='X9', util=11)
 X10 = gen_card(name='X10', util=74)
 
-# cards = dbc.CardGroup([X1, X2, X3, X4, X5, X6])
-
 card_graph = dbc.Card(
     dcc.Graph(id='my_bar', figure={'data': [{'x':[1, 2, 3, 4, 5], 'y':[20, 21, 19, 28, 35], 'type': 'bar'}
                                             ]
@@ -53,15 +59,24 @@ card_graph = dbc.Card(
 
 # ----------------------------------APP LAYOUT------------------------------------------
 header = html.Div([
-    html.H2("Header", className='display-4', style={'text-align': 'left', "padding": "1rem "}),
-    html.Hr(),
-    dbc.Navbar([],
-                style=HEADER_STYLE
-               )
-])
+    html.H2("Header", className='display-4', style={'text-align': 'left', "padding-left": "1rem "}),
+    dbc.Nav([]),
+
+    ],
+    style=HEADER_STYLE
+
+)
+
+mainspace = html.Div([
+        html.H2('Mainspace', style={'text-align': 'center', "padding": "1rem "}),
+        dbc.Nav([],
+                 vertical=False),
+        ],
+        style=MAINSPACE_STYLE
+)
+
 sidebar = html.Div(
     [
-        #html.H2("Sidebar", className="display-4"),
         html.H2('Sidebar'),
         html.Hr(),
         html.Hr(),
@@ -69,20 +84,18 @@ sidebar = html.Div(
         html.Hr(),
         html.Hr(),
 
-
-
         dbc.Nav(
             [
                 dbc.Row([dbc.Col(X1, width='auto'),
-                        dbc.Col(X2, width='auto')]),
+                        dbc.Col(X2, width='auto')], justify='center'),
                 dbc.Row([dbc.Col(X3, width='auto'),
-                        dbc.Col(X4, width='auto')]),
+                        dbc.Col(X4, width='auto')], justify='center'),
                 dbc.Row([dbc.Col(X5, width='auto'),
-                        dbc.Col(X6, width='auto')]),
+                        dbc.Col(X6, width='auto')], justify='center'),
                 dbc.Row([dbc.Col(X7, width='auto'),
-                        dbc.Col(X8, width='auto')]),
+                        dbc.Col(X8, width='auto')], justify='center'),
                 dbc.Row([dbc.Col(X9, width='auto'),
-                        dbc.Col(X10, width='auto')]),
+                        dbc.Col(X10, width='auto')], justify='center'),
             ],
             navbar=False,
             navbar_scroll=True,
@@ -95,25 +108,13 @@ sidebar = html.Div(
 
 app.layout = html.Div([
 
-    #html.H1("OPC-UA Monitoring", style={'text-align': 'center', "margin-bottom": "5vh"}),
-    dbc.Row([
-        dbc.Row(dbc.Col(header)),
-        dbc.Row([dbc.Col(sidebar)])
-    ])
-    #header,
-    #sidebar
-    #dbc.Row([dbc.Col(sidebar, width=3)])
+    header,
+    sidebar,
+    mainspace,
 
-
-
-
-
-    #sidebar
 
 ],
 
-    #className='row',
-    #style={'height': '90vh', 'padding-left': '2%', 'padding-right': '1%', 'padding-bottom': '2%'}
 
 )
 
