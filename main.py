@@ -4,38 +4,46 @@ import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output  # pip install dash (version 2.0.0 or higher)
 import dash_bootstrap_components as dbc
 from cards_generator import gen_card
+from spaces import spaces
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='assets')
 
-HEADER_STYLE = {
-    "position": "fixed",
-    "top": '2%',
-    "left": '1%',
-    "right": '1%',
-    "background": "cyan",
-    'overflow': 'auto'
-}
 
 
 SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": '14%',
+    "position": "fixed", # absolute if you want the header scroll under header
+    "top": '11%',
     "left": '1%',
     "bottom": '2%',
     "width": "22%",
     "padding": "1rem ",
     'background': 'cyan',
     "overflow": "auto",
+    'border-radius': '15px'
 }
 
 MAINSPACE_STYLE = {
-                'position': 'fixed',
-                'top': '14%',
-                'width': '75%',
-                'right': '1%',
-                'bottom': '2%',
-                'background-color': 'cyan',
-                "overflow": "auto"
+    'position': 'fixed', # absolute if you want main to scroll under header
+    'top': '11%',
+    'width': '75%',
+    'right': '1%',
+    'bottom': '2%', # remove if you want main to scroll under header
+    'background-color': 'cyan',
+    "overflow": "auto",
+    'border-radius': '15px',
+    #'z-index': '1'
+}
+
+BACK_STYLE = {
+    'verticalAlign':'middle',
+    'textAlign': 'center',
+    'position':'fixed',
+    'width':'100%',
+    'height':'100%',
+    'top':'0px',
+    'left':'0px',
+    'z-index':'1000',
+    'background-color': 'coral',
 }
 
 # ----------------------------------CARDS--------------------------------------------
@@ -58,20 +66,21 @@ card_graph = dbc.Card(
 )
 
 # ----------------------------------APP LAYOUT------------------------------------------
-header = html.Div([
-    html.H2("Header", className='display-4', style={'text-align': 'left', "padding-left": "1rem "}),
+header = html.Div(className='header', children=[
+    html.H2("Header",  style={'text-align': 'left', "padding-left": "1rem "}),
     dbc.Nav([]),
 
     ],
-    style=HEADER_STYLE
+
 
 )
 
-mainspace = html.Div([
-        html.H2('Mainspace', style={'text-align': 'center', "padding": "1rem "}),
-        dbc.Nav([],
-                 vertical=False),
-        ],
+mainspace = html.Div(
+    [
+        html.H2('Mainspace', style={'text-align': 'center', "padding": "1rem"}),
+        spaces,
+        dbc.Nav([], vertical=False),
+    ],
         style=MAINSPACE_STYLE
 )
 
@@ -108,14 +117,13 @@ sidebar = html.Div(
 
 app.layout = html.Div([
 
-    header,
-    sidebar,
-    mainspace,
+        #html.Div([header, mainspace]),
+        header,
+        mainspace,
+        sidebar,
 
-
-],
-
-
+    ],
+    style=BACK_STYLE
 )
 
 

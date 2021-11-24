@@ -1,0 +1,9 @@
+ .header {
+    position: fixed;
+    top: 2%;
+    left: 1%;
+    right: 1%;
+    background: cyan;
+    overflow: auto;
+    border-radius: 15px;
+}
