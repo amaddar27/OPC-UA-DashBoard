@@ -72,19 +72,18 @@ header = html.Div(className='header', children=[
 
     ],
 
-
 )
 
-mainspace = html.Div(
+mainspace = html.Div(className='main-space', children=
     [
         html.H2('Mainspace', style={'text-align': 'center', "padding": "1rem"}),
         spaces,
-        dbc.Nav([], vertical=False),
+        dbc.Nav([],),
     ],
-        style=MAINSPACE_STYLE
+       #style=MAINSPACE_STYLE
 )
 
-sidebar = html.Div(
+sidebar = html.Div(className='sidebar', children=
     [
         html.H2('Sidebar'),
         html.Hr(),
@@ -112,10 +111,10 @@ sidebar = html.Div(
             pills=True,
         ),
     ],
-    style=SIDEBAR_STYLE,
+    #style=SIDEBAR_STYLE,
 )
 
-app.layout = html.Div([
+app.layout = html.Div(className='background', children=[
 
         #html.Div([header, mainspace]),
         header,
@@ -123,7 +122,7 @@ app.layout = html.Div([
         sidebar,
 
     ],
-    style=BACK_STYLE
+    #style=BACK_STYLE
 )
 
 

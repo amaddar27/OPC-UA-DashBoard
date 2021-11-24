@@ -1,0 +1,45 @@
+.header {
+    position: fixed;
+    top: 2%;
+    left: 1%;
+    right: 1%;
+    background: cyan;
+    overflow: auto;
+    border-radius: 15px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 11%;
+    left: 1%;
+    bottom: 2%;
+    width: 22%;
+    padding: 1rem;
+    background: cyan;
+    overflow: auto;
+    border-radius: 15px;
+}
+
+.main-space = {
+    position: fixed;
+    top: 11%;
+    width: 75%;
+    right: 1%;
+    bottom: 2%;
+    background: cyan;
+    overflow: auto;
+    border-radius: 15px;
+}
+
+.background = {
+    verticalAlign: middle;
+    textAlign: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    background: coral;
+}
+
