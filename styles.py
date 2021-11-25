@@ -1,35 +1,36 @@
 HEADER_STYLE = {
     'position': 'fixed',
-    'top': '0.5%',
-    'left': '0.5%',
-    'right': '0.5%',
-    'background': 'rgba(226, 222, 208, 0.5 )',
-    'box-shadow': '5px 5px 5px 5px grey',
-    'overflow': 'auto',
-    'border-radius': '5px',
+    'top': '0%',
+    'left': '0%',
+    'right': '0%',
+    'height': '6%',
+    'background': 'rgba(202, 178, 159, 0.7 )',
+    #'box-shadow': '0px 0px 2px 2px grey',
+    #'overflow': 'auto',
+    #'border-radius': '5px',
 }
 
 SIDEBAR_STYLE = {
     "position": "fixed",  # absolute if you want the header scroll under header
-    "top": '8%',
+    "top": '6%',
     "left": '0.5%',
     "bottom": '1%',
     "width": "22%",
-    "padding": "1rem ",
-    'background': 'rgba(51,39,34, 1)',
+    "padding": "1rem",
+    'background': 'rgba(51,39,34, 0.1)',
     "overflow": "auto",
     'border-radius': '5px'
 }
 
 MAINSPACE_STYLE = {
     'position': 'fixed',  # absolute if you want main to scroll under header
-    'top': '8%',
-    'width': '76.5%',
-    'right': '0.5%',
+    'top': '6%',
+    'width': '78%',
+    'right': '0%',
     'bottom': '1%',  # remove if you want main to scroll under header
     'background-color': 'rgba(221,220,220, 0.7)',
     "overflow": "auto",
-    'border-radius': '5px',
+    'border-radius': '0px',
     # 'z-index': '1'
 }
 

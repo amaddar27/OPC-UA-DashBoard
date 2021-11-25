@@ -54,15 +54,15 @@ sidebar = html.Div(className='side-bar', children=
         dbc.Nav(
             [
                 dbc.Row([dbc.Col(X1, width='auto'),
-                        dbc.Col(X2, width='auto')], justify='center'),
+                        dbc.Col(X2, width='auto')], justify='space-around'),
                 dbc.Row([dbc.Col(X3, width='auto'),
-                        dbc.Col(X4, width='auto')], justify='center'),
+                        dbc.Col(X4, width='auto')], justify='space-around'),
                 dbc.Row([dbc.Col(X5, width='auto'),
-                        dbc.Col(X6, width='auto')], justify='center'),
+                        dbc.Col(X6, width='auto')], justify='space-around'),
                 dbc.Row([dbc.Col(X7, width='auto'),
-                        dbc.Col(X8, width='auto')], justify='center'),
+                        dbc.Col(X8, width='auto')], justify='space-around'),
                 dbc.Row([dbc.Col(X9, width='auto'),
-                        dbc.Col(X10, width='auto')], justify='center'),
+                        dbc.Col(X10, width='auto')], justify='space-around'),
             ],
             navbar=False,
             navbar_scroll=True,
@@ -101,4 +101,4 @@ def graph(button):
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host="0.0.0.0", port="8050", debug=False)
