@@ -5,53 +5,18 @@ from dash import Dash, dcc, html, Input, Output  # pip install dash (version 2.0
 import dash_bootstrap_components as dbc
 from cards_generator import gen_card
 from spaces import spaces
+from styles import *
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='assets')
 
 
 
-SIDEBAR_STYLE = {
-    "position": "fixed", # absolute if you want the header scroll under header
-    "top": '11%',
-    "left": '1%',
-    "bottom": '2%',
-    "width": "22%",
-    "padding": "1rem ",
-    'background': 'cyan',
-    "overflow": "auto",
-    'border-radius': '15px'
-}
-
-MAINSPACE_STYLE = {
-    'position': 'fixed', # absolute if you want main to scroll under header
-    'top': '11%',
-    'width': '75%',
-    'right': '1%',
-    'bottom': '2%', # remove if you want main to scroll under header
-    'background-color': 'cyan',
-    "overflow": "auto",
-    'border-radius': '15px',
-    #'z-index': '1'
-}
-
-BACK_STYLE = {
-    'verticalAlign':'middle',
-    'textAlign': 'center',
-    'position':'fixed',
-    'width':'100%',
-    'height':'100%',
-    'top':'0px',
-    'left':'0px',
-    'z-index':'1000',
-    'background-color': 'coral',
-}
-
 # ----------------------------------CARDS--------------------------------------------
 X1 = gen_card(name='X1', util=10)
-X2 = gen_card(name='X2', util=17)
+X2 = gen_card(name='X2', util=71)
 X3 = gen_card(name='X3', util=30)
 X4 = gen_card(name='X4', util=13)
-X5 = gen_card(name='X5', util=21)
+X5 = gen_card(name='X5', util=50)
 X6 = gen_card(name='X6', util=25)
 X7 = gen_card(name='X7', util=43)
 X8 = gen_card(name='X8', util=27)
@@ -69,8 +34,8 @@ card_graph = dbc.Card(
 header = html.Div(className='header', children=[
     html.H2("Header",  style={'text-align': 'left', "padding-left": "1rem "}),
     dbc.Nav([]),
-
     ],
+    style=HEADER_STYLE
 
 )
 
@@ -80,18 +45,12 @@ mainspace = html.Div(className='main-space', children=
         spaces,
         dbc.Nav([],),
     ],
-       #style=MAINSPACE_STYLE
+       style=MAINSPACE_STYLE
 )
 
-sidebar = html.Div(className='sidebar', children=
+sidebar = html.Div(className='side-bar', children=
     [
-        html.H2('Sidebar'),
-        html.Hr(),
-        html.Hr(),
-        html.Hr(),
-        html.Hr(),
-        html.Hr(),
-
+        html.H2('Sidebar', style={'color': 'white'}),
         dbc.Nav(
             [
                 dbc.Row([dbc.Col(X1, width='auto'),
@@ -111,18 +70,17 @@ sidebar = html.Div(className='sidebar', children=
             pills=True,
         ),
     ],
-    #style=SIDEBAR_STYLE,
+    style=SIDEBAR_STYLE,
 )
 
-app.layout = html.Div(className='background', children=[
-
+app.layout = html.Div(className='bg', children=[
         #html.Div([header, mainspace]),
         header,
         mainspace,
         sidebar,
 
     ],
-    #style=BACK_STYLE
+    style=BACK_STYLE
 )
 
 
