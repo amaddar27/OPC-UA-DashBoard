@@ -8,18 +8,19 @@ def merge_two_dicts(x, y):
 
 def get_colour(util):
     if 60 <= util :
-        colour = 'rgba(152,161,72,1)'
+        colour = 'rgba(152,161,72,0.7)'
     elif 35 <= util < 60:
-        colour = 'rgba(243,156,18,1)'
+        colour = 'rgba(243,156,18,0.7)'
     else:
-        colour = 'rgba(231,76,60,1)'
+        colour = 'rgba(231,76,60,0.7)'
     return {'background': colour}
 
 def gen_body(name, util):
     body = dbc.CardBody(
         [
             html.Div(
-                dbc.Button(name, id='button'+name, value=name, color="secondary", style={"margin-bottom": "20px"}),
+                dbc.Button(name, id='button'+name, href="/"+name, value=name, color="secondary",
+                           style={"margin-bottom": "20px"}),
                 className="d-grid gap-2"
             ),
             # html.P('\n'),

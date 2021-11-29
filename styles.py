@@ -16,7 +16,7 @@ SIDEBAR_STYLE = {
     "left": '0.5%',
     "bottom": '1%',
     "width": "22%",
-    "padding": "1rem",
+    "padding-right": "2%",
     'background': 'rgba(51,39,34, 0.1)',
     "overflow": "auto",
     'border-radius': '5px'
