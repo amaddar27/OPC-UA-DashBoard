@@ -12,7 +12,7 @@ HEADER_STYLE = {
 
 SIDEBAR_STYLE = {
     "position": "fixed",  # absolute if you want the header scroll under header
-    "top": '6%',
+    "top": '0%', # was 6%
     "left": '0.5%',
     "bottom": '1%',
     "width": "22%",
@@ -24,11 +24,12 @@ SIDEBAR_STYLE = {
 
 MAINSPACE_STYLE = {
     'position': 'fixed',  # absolute if you want main to scroll under header
-    'top': '6%',
+    'top': '0%', # was 6%
     'width': '78%',
     'right': '0%',
     'bottom': '1%',  # remove if you want main to scroll under header
-    'background-color': 'rgba(221,220,220, 0.7)',
+    #'background-color': 'rgba(221,220,220, 0.7)',
+    'background-color': 'white',
     "overflow": "auto",
     'border-radius': '0px',
     # 'z-index': '1'
