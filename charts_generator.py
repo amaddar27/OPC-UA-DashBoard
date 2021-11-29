@@ -16,8 +16,8 @@ def line(id):
 
 perf_card = dbc.Card(
     dbc.CardBody(html.H2('Performance'), className='align-self-center',
-                 style={'text-align': 'center', 'font-size': 'x-large'}),
-    #]style={ 'height': '75%'},
+                 style={'text-align': 'center', 'font-size': 'x-large', 'height': 232}),
+    #style={'height': '75%'},
     #inverse=True,
     outline=True,
 )

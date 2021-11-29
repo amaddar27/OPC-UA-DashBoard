@@ -29,6 +29,8 @@ MAINSPACE_STYLE = {
     'right': '0%',
     'bottom': '1%',  # remove if you want main to scroll under header
     #'background-color': 'rgba(221,220,220, 0.7)',
+    "padding-left": "1%",
+    "padding-right": "1%",
     'background-color': 'white',
     "overflow": "auto",
     'border-radius': '0px',
