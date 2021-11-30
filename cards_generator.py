@@ -20,14 +20,14 @@ def gen_body(name, util):
         [
             html.Div(
                 dbc.Button(name, id='button'+name, href="/"+name, value=name, color="secondary",
-                           style={"margin-bottom": "20px"}),
+                           style={"margin-bottom": "15px"}),
                 className="d-grid gap-2"
             ),
             # html.P('\n'),
             html.P(
                 '{}%'.format(util),
                 className="align-self-center",
-                style={'text-align': 'center', 'font-size': 'x-large'}
+                style={'text-align': 'center', 'font-size': 'xx-large'}
             ),
         ]
 
@@ -36,9 +36,9 @@ def gen_body(name, util):
 
 def get_style(name, util):
     if name in {'X10', 'X9'}:
-        style = {"width": "8rem", 'height': '7rem'}  # css styling
+        style = {'height': '9rem'}  # css styling
     else:
-        style = {"width": "8rem", 'height': '7rem', "margin-bottom": "20px"}
+        style = {'height': '9rem', "margin-bottom": "20px"}
     style = merge_two_dicts(get_colour(util), style)
     return style
 

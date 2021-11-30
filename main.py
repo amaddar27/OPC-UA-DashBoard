@@ -12,7 +12,6 @@ from charts_generator import bar, perf_card
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='assets')
 
 # ----------------------------------CARDS--------------------------------------------
-
 X1 = gen_card(name='X1', util=10)
 X2 = gen_card(name='X2', util=71)
 X3 = gen_card(name='X3', util=30)
@@ -24,12 +23,6 @@ X8 = gen_card(name='X8', util=27)
 X9 = gen_card(name='X9', util=11)
 X10 = gen_card(name='X10', util=74)
 
-card_graph = dbc.Card(
-    dcc.Graph(id='my_bar', figure={'data': [{'x': [1, 2, 3, 4, 5], 'y': [20, 21, 19, 28, 35], 'type': 'bar'}
-                                            ]
-                                   }
-              )
-)
 
 # ----------------------------------APP LAYOUT------------------------------------------
 header = html.Div(className='header', children=[
@@ -58,20 +51,20 @@ mainspace = html.Div(className='main-space', children=
 
 sidebar = html.Div(className='side-bar', children=
 [
-    html.H2('Sidebar', style={'color': 'white'}),
+    html.H2('Sidebar', style={'color': 'white', 'padding-top': '7%'}),
     html.Hr(style={'color': 'white'}),
     dbc.Nav(
         [
-            dbc.Row([dbc.Col(X1, width='auto'),
-                     dbc.Col(X2, width='auto')], justify='center'),
-            dbc.Row([dbc.Col(X3, width='auto'),
-                     dbc.Col(X4, width='auto')], justify='center'),
-            dbc.Row([dbc.Col(X5, width='auto'),
-                     dbc.Col(X6, width='auto')], justify='center'),
-            dbc.Row([dbc.Col(X7, width='auto'),
-                     dbc.Col(X8, width='auto')], justify='center'),
-            dbc.Row([dbc.Col(X9, width='auto'),
-                     dbc.Col(X10, width='auto')], justify='center'),
+            dbc.Row([dbc.Col(X1, width='auto', lg=6),
+                     dbc.Col(X2, width='auto', lg=6)], justify='center'),
+            dbc.Row([dbc.Col(X3, width='auto', lg=6),
+                     dbc.Col(X4, width='auto', lg=6)], justify='center'),
+            dbc.Row([dbc.Col(X5, width='auto', lg=6),
+                     dbc.Col(X6, width='auto', lg=6)], justify='center'),
+            dbc.Row([dbc.Col(X7, width='auto', lg=6),
+                     dbc.Col(X8, width='auto', lg=6)], justify='center'),
+            dbc.Row([dbc.Col(X9, width='auto', lg=6),
+                     dbc.Col(X10, width='auto', lg=6)], justify='center'),
         ],
         navbar=False,
         navbar_scroll=True,
@@ -99,7 +92,7 @@ app.layout = html.Div(className='bg', children=[
     Output(component_id='bar', component_property='figure'),
     Output(component_id='line', component_property='figure')],
     # Input(component_id='buttonX1', component_property='X1')
-    Input("url", "pathname")
+    [Input("url", "pathname")]
 )
 def render_page_content(pathname):
     name = pathname[1:]
