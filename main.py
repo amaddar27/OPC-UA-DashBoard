@@ -38,6 +38,13 @@ linechart = bar('line')
 mainspace = html.Div(className='main-space', children=
 [
     html.H2(id='output_text', children=[], style={'text-align': 'center', "padding": "1rem"}),
+    dcc.Slider(
+        id='my-slider',
+        min=0,
+        max=35,
+        step=1,
+        value=10,
+    ),
     #html.P(id='output_text', children=[]),
     #dbc.Row([barchart], class_name='h-30'),
     barchart,
@@ -92,15 +99,15 @@ app.layout = html.Div(className='bg', children=[
     Output(component_id='bar', component_property='figure'),
     Output(component_id='line', component_property='figure')],
     # Input(component_id='buttonX1', component_property='X1')
-    [Input("url", "pathname")]
+    [Input("url", "pathname"), Input('my-slider', 'value')]
 )
-def render_page_content(pathname):
+def render_page_content(pathname, value):
     name = pathname[1:]
     if pathname == '/'+name:
         text = name
 
-        x = np.arange(10)
-        rand = np.random.randint(30, size=10)
+        x = np.arange(value)
+        rand = np.random.randint(30, size=value)
         bar = px.bar(x=x, y=x*rand, height=300)
         bar.update_layout(
             showlegend=False,
