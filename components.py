@@ -23,6 +23,7 @@ X10 = gen_card(name='X10', util=74)
 # ----------------------------------CONTENTS--------------------------------------------
 barchart = bar('bar')
 linechart = bar('line')
+timeline = bar('time')
 
 perf_card = dbc.Card(
     dbc.CardBody(html.H2('Performance'), className='align-self-center',
@@ -39,10 +40,16 @@ slider = dcc.Slider(
         value=10,
     )
 
+datepicker = dcc.DatePickerRange(
+    start_date_placeholder_text="Start Period",
+    end_date_placeholder_text="End Period",
+    calendar_orientation='vertical',
+)
+
 # ----------------------------------BODIES--------------------------------------------
 
 header = html.Div(className='header', children=[
-        html.H2("Header", style={'text-align': 'left', "padding-left": "1rem "}),
+        html.H2("Header", style={'text-align': 'left', "padding-left": "1rem"}),
         dbc.Nav([]),
     ],
     style=HEADER_STYLE
@@ -50,9 +57,10 @@ header = html.Div(className='header', children=[
 
 mainspace = html.Div(className='main-space', children=[
         html.H2(id='output_text', children=[], style={'text-align': 'center', "padding": "1rem"}),
-        slider,
+        datepicker,
         barchart,
         html.Br(),
+        slider,
         dbc.Row([dbc.Col(perf_card, width=3, lg=3),
                  dbc.Col(linechart, width=9, lg=9)])
     ],

@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 from dash import Dash, Input, Output  # pip install dash (version 2.0.0 or higher)
 from components import *
 
-from spaces import spaces
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='assets')
 
@@ -32,10 +31,10 @@ def render_page_content(pathname, value):
     name = pathname[1:]
     if pathname == '/' + name:
         text = name
-
+        df = pd.read_csv('Data.csv')
         x = np.arange(value)
         rand = np.random.randint(30, size=value)
-        bar = px.bar(x=x, y=x * rand, height=300)
+        bar = px.bar(x=df['Day'], y=df['Utilisation'], height=300)
         bar.update_layout(
             showlegend=False,
             plot_bgcolor="white",
