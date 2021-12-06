@@ -1,11 +1,12 @@
 from cards_generator import gen_card
 import dash_bootstrap_components as dbc
+from datetime import datetime as dt
 from dash import dcc, html
 from styles import *
 
 def bar(id):
     chart = dbc.Card(
-        dbc.CardBody([dcc.Graph(id=id, figure={})]),
+        dbc.CardBody([dcc.Graph(id=id, figure={})], style={'background-color':'rgba(221,220,220, 0.2)'})
     )
     return chart
 # ----------------------------------MACHINES--------------------------------------------
@@ -40,10 +41,44 @@ slider = dcc.Slider(
         value=10,
     )
 
-datepicker = dcc.DatePickerRange(
-    start_date_placeholder_text="Start Period",
-    end_date_placeholder_text="End Period",
-    calendar_orientation='vertical',
+date_start = dcc.DatePickerSingle(
+        id='date-picker-start',
+        min_date_allowed=dt(2021, 12, 2).date(),
+        max_date_allowed=dt(2022, 12, 2).date(),
+        initial_visible_month=dt(2022, 6, 2).date(),
+        date=dt(2022, 6, 2).date(),
+        style={'margin-top':'10%'}
+    )
+
+date_end = dcc.DatePickerSingle(
+        id='date-picker-end',
+        min_date_allowed=dt(2021, 12, 2).date(),
+        max_date_allowed=dt(2022, 12, 2).date(),
+        initial_visible_month=dt(2022, 12, 2).date(),
+        date=dt(2022, 12, 2).date(),
+        style={'margin-top':'10%'}
+    )
+
+freq_menu = dcc.Dropdown(
+    options=[
+            {'label': 'Daily', 'value': 'daily'},
+            {'label': 'Weekly', 'value': 'weekly'},
+        ],
+    value='daily',
+    searchable=False,
+    clearable=False,
+    style={'margin-top':'18%'}
+)
+
+download_but = dbc.Button("Download", color="primary", style={'width':'70%',"margin-top": "5%", 'fontSize': 25})
+
+alert = dbc.Alert(
+    "'Start' date must be prior to 'End' date.",
+    id="alert-fade",
+    dismissable=True,
+    is_open=False,
+    color="danger",
+    style={'fontSize': 25}
 )
 
 # ----------------------------------BODIES--------------------------------------------
@@ -55,9 +90,42 @@ header = html.Div(className='header', children=[
     style=HEADER_STYLE
 )
 
+start = html.Div(children=[dbc.Row([
+            dbc.Col(html.Plaintext('Start', style={'fontSize': 25}), width='auto'),
+            dbc.Col(date_start, width='auto')], justify='center'
+    )]
+)
+
+end = html.Div(children=[dbc.Row([
+            dbc.Col(html.Plaintext('End', style={'fontSize': 25}), width='auto'),
+            dbc.Col(date_end, width='auto')], justify='center'
+    )]
+)
+
+freq = html.Div(children=[dbc.Row([
+            dbc.Col(html.Plaintext('Frequency', style={'fontSize': 25}), width='auto'),
+            dbc.Col(freq_menu, width='4')], justify='center'
+    )]
+)
+
+dates_space = html.Div(children=[
+    dbc.Row([
+             dbc.Col(start, width='3'),
+             dbc.Col(end, width='2'),
+             dbc.Col(freq, width='4'),
+             dbc.Col(download_but)]),
+
+    ],
+    style = {'width': '100%','background-color': 'rgba(192,192,192,1)', 'padding-top': '1%', 'padding-bottom': '0.3%'
+    }
+)
+
 mainspace = html.Div(className='main-space', children=[
-        html.H2(id='output_text', children=[], style={'text-align': 'center', "padding": "1rem"}),
-        datepicker,
+        html.H2(id='output_text', children=[], style={'text-align': 'center', 'font-size':80}),
+        html.Hr(),
+        dates_space,
+        alert,
+        html.P(),
         barchart,
         html.Br(),
         slider,
@@ -69,8 +137,8 @@ mainspace = html.Div(className='main-space', children=[
 
 
 sidebar = html.Div(className='side-bar', children=[
-        html.H2('Sidebar', style={'color': 'white', 'padding-top': '7%'}),
-        html.Hr(style={'color': 'white'}),
+        html.H2('Sidebar', style={'padding-top': '7%'}),
+        html.Hr(),
         dbc.Nav(
             [
                 dbc.Row([dbc.Col(X1, width='auto', lg=6),
