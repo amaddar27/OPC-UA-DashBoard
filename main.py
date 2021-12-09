@@ -3,61 +3,87 @@ import numpy as np
 import plotly.express as px  # (version 4.7.0 or higher)
 import plotly.graph_objects as go
 from dash import Dash, Input, Output, State  # pip install dash (version 2.0.0 or higher)
-from components import *
+from bodies import *
 
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='assets')
 
 # ----------------------------------APP LAYOUT------------------------------------------
 
-app.layout = html.Div(className='bg', children=[
-        dcc.Location(id="url"),
-        mainspace,
-        sidebar,
-    ],
-    style=BACK_STYLE
-)
+url_content_div = html.Div([dcc.Location(id="url", refresh=False),html.Div(id='page-content')])
 
+home_layout = html.Div(children=[
+        home_space,
+        sidebar],
+    style=BACK_STYLE)
+
+content_layout = html.Div(children=[
+        content_space,
+        sidebar],
+    style=BACK_STYLE)
+
+
+app.layout = url_content_div
+
+app.validation_layout = html.Div([
+    url_content_div,
+    home_layout,
+    content_layout,
+])
+#app.config.suppress_callback_exceptions = True
 
 # -------------------------------------------------------------------------------------
+@app.callback(Output('page-content', 'children'),
+              Input('url', 'pathname'))
+def display_page(pathname):
+    name = pathname[1:]
+    print(name)
+    if pathname == '/home' or pathname == '/':
+        return home_layout
+    elif pathname == '/' + name:
+        return content_layout
+
+
+@app.callback(
+    Output(component_id='line', component_property='figure'),
+    [Input('my-slider', 'value')]
+)
+def load_home(value):
+    x = np.arange(value)
+    rand = np.random.randint(100, size=value)
+    line = px.line(x=x, y=rand, height=200)
+    line.update_layout(
+        showlegend=False,
+        paper_bgcolor='rgba(221,220,220, 0.075)',
+        plot_bgcolor="rgba(221,220,220, 0.075)",
+        margin=dict(t=0, l=5, b=5, r=0)
+    )
+    return line
+
 @app.callback(
     [Output(component_id='output_text', component_property='children'),
-     Output(component_id='bar', component_property='figure'),
-     Output(component_id='line', component_property='figure')],
-    # Input(component_id='buttonX1', component_property='X1')
-    [Input("url", "pathname"), Input('my-slider', 'value'),
+     Output(component_id='bar', component_property='figure')],
+    [Input("url", "pathname"),
      Input('date-picker-start', 'date'), Input('date-picker-end', 'date')]
 )
-def render_page_content(pathname, value, start_date, end_date):
-    name = pathname[1:]
-    if pathname == '/' + name:
-        text = name
-        df = pd.read_csv('Data.csv')
-        df = df.loc[df['Machine'] == name]
-        df.set_index('Day', inplace=True)
-        if start_date < end_date:
-            df = df.loc[start_date: end_date]
+def render_page_content(pathname, start_date, end_date):
+    text = pathname[1:]
+    df = pd.read_csv('Data.csv')
+    df = df.loc[df['Machine'] == text]
+    df.set_index('Day', inplace=True)
+    if start_date < end_date:
+        df = df.loc[start_date: end_date]
 
+    bar = px.bar(df, x=df.index.tolist(), y=df['Utilisation'], height=300,  labels = {'x':'Date'})
+    bar.layout.yaxis.tickformat = ',.0%'
+    bar.update_layout(
+        showlegend=False,
+        paper_bgcolor='rgba(221,220,220, 0.075)',
+        plot_bgcolor="rgba(221,220,220, 0.075)",
+        margin=dict(t=0, l=5, b=5, r=0)
+    )
+    return text, bar
 
-        x = np.arange(value)
-        rand = np.random.randint(30, size=value)
-        bar = px.bar(x=df.index.tolist(), y=df['Utilisation'], height=300)
-        bar.layout.yaxis.tickformat = ',.0%'
-        #bar.layout.yaxis.hoverformat = 'closest'
-        bar.update_layout(
-            showlegend=False,
-            paper_bgcolor='rgba(221,220,220, 0.2)',
-            plot_bgcolor="rgba(221,220,220, 0.2)",
-            margin=dict(t=0, l=5, b=5, r=0)
-        )
-
-        line = px.line(x=x, y=x * rand, height=200)
-        line.update_layout(
-            showlegend=False,
-            plot_bgcolor="white",
-            margin=dict(t=0, l=5, b=5, r=0)
-        )
-        return text, bar, line
 
 
 @app.callback(

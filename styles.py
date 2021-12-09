@@ -19,7 +19,7 @@ SIDEBAR_STYLE = {
     'right': '2%',
     "padding-right": "2%",
     "padding-left": "1%",
-    'background': 'rgba(51,39,34, 0.15)',
+    'background': 'rgba(51,39,34, 0.2)',
     "overflow": "auto",
     'border-radius': '5px'
 }
