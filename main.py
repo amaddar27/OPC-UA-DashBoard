@@ -85,7 +85,6 @@ def render_page_content(pathname, start_date, end_date):
     return text, bar
 
 
-
 @app.callback(
     Output("alert-fade", "is_open"),
     [Input('date-picker-start', 'date'), Input('date-picker-end', 'date')],

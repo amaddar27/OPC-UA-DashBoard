@@ -65,7 +65,7 @@ content_space = html.Div(className='main-space', children=[
 sidebar = html.Div(className='side-bar', children=[
         dbc.Row([dbc.Col(dcc.Link('[LOGO]', href='/home', style={'font-size':25}), width=3),
                  dbc.Col(html.H2('Sidebar', style={'fontSize': 50}), width=6)
-                 ], align="center", justify="start", className="g-0", style={'padding-top':'7%'}),
+                 ], align="center", justify="start", style={'padding-top':'7%'}),
         html.Hr(),
         dbc.Nav(
             [
