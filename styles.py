@@ -11,13 +11,12 @@ HEADER_STYLE = {
 }
 
 SIDEBAR_STYLE = {
-    "position": "fixed",  # absolute if you want the header scroll under header
-    "top": '0%', # was 6%
+    "position": "fixed",  # absolute if you want the sidebar scroll under header
+    "top": '0%',  # was 6%
     "left": '0%',
     "bottom": '0.25%',
     "width": "22%",
-    'right': '2%',
-    "padding-right": "2%",
+    "padding-right": "1%",
     "padding-left": "1%",
     'background': 'rgba(51,39,34, 0.2)',
     "overflow": "auto",

@@ -33,8 +33,8 @@ app.validation_layout = html.Div([
 #app.config.suppress_callback_exceptions = True
 
 # -------------------------------------------------------------------------------------
-@app.callback(Output('page-content', 'children'),
-              Input('url', 'pathname'))
+@app.callback(Output(component_id='page-content', component_property='children'),
+              Input(component_id='url', component_property='pathname'))
 def display_page(pathname):
     name = pathname[1:]
     print(name)
@@ -44,6 +44,7 @@ def display_page(pathname):
         return content_layout
 
 
+
 @app.callback(
     Output(component_id='line', component_property='figure'),
     [Input('my-slider', 'value')]
@@ -51,12 +52,12 @@ def display_page(pathname):
 def load_home(value):
     x = np.arange(value)
     rand = np.random.randint(100, size=value)
-    line = px.line(x=x, y=rand, height=200)
+    line = px.line(x=x, y=rand, height=230)
     line.update_layout(
         showlegend=False,
-        paper_bgcolor='rgba(221,220,220, 0.075)',
-        plot_bgcolor="rgba(221,220,220, 0.075)",
-        margin=dict(t=0, l=5, b=5, r=0)
+        paper_bgcolor='white',
+        plot_bgcolor="rgba(221,220,220, 0.2)",
+        margin=dict(t=15, l=5, b=5, r=0)
     )
     return line
 
@@ -67,18 +68,18 @@ def load_home(value):
      Input('date-picker-start', 'date'), Input('date-picker-end', 'date')]
 )
 def render_page_content(pathname, start_date, end_date):
-    text = pathname[1:]
+    text = pathname[1:] # used for the header of the page to show machine's name
     df = pd.read_csv('Data.csv')
     df = df.loc[df['Machine'] == text]
     df.set_index('Day', inplace=True)
     if start_date < end_date:
         df = df.loc[start_date: end_date]
 
-    bar = px.bar(df, x=df.index.tolist(), y=df['Utilisation'], height=300,  labels = {'x':'Date'})
+    bar = px.bar(df, x=df.index.tolist(), y=df['Utilisation'], height=300,  labels={'x': 'Date'})
     bar.layout.yaxis.tickformat = ',.0%'
     bar.update_layout(
         showlegend=False,
-        paper_bgcolor='rgba(221,220,220, 0.075)',
+        paper_bgcolor='white',
         plot_bgcolor="rgba(221,220,220, 0.075)",
         margin=dict(t=0, l=5, b=5, r=0)
     )

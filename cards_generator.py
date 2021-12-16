@@ -19,11 +19,10 @@ def gen_body(name, util):
     body = dbc.CardBody(
         [
             html.Div(
-                dbc.Button(name, id='button'+name, href="/"+name, value=name, color="secondary",
+                dbc.Button(name, id='button'+name, href="/"+name, color="secondary",
                            style={"margin-bottom": "15px"}),
                 className="d-grid gap-2"
             ),
-            # html.P('\n'),
             html.P(
                 '{}%'.format(util),
                 className="align-self-center",
@@ -36,19 +35,17 @@ def gen_body(name, util):
 
 def get_style(name, util):
     if name in {'X10', 'X9'}:
-        style = {'height': '9rem'}  # css styling
+        style = {'height': '9rem'}
     else:
         style = {'height': '9rem', "margin-bottom": "20px"}
     style = merge_two_dicts(get_colour(util), style)
     return style
 
 
-
 def gen_card(name, util):
     card = dbc.Card(
         gen_body(name, util),
         style=get_style(name, util),
-        #color="success",  # https://bootswatch.com/default/ for more card colors
         inverse=True,  # change color of text (black or white)
         outline=False,  # True = remove the block colors from the background and header
     )

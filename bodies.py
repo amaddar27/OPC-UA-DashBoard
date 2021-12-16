@@ -51,7 +51,7 @@ home_space = html.Div([
 
 
 content_space = html.Div(className='main-space', children=[
-        html.H2(id='output_text', children=[], style={'text-align': 'center', 'font-size':80}),
+        html.H2(id='output_text', children=[], style={'text-align': 'center', 'font-size': 80}),
         html.Hr(),
         dates_space,
         alert,
@@ -61,29 +61,25 @@ content_space = html.Div(className='main-space', children=[
     style=MAINSPACE_STYLE
 )
 
-
 sidebar = html.Div(className='side-bar', children=[
         dbc.Row([dbc.Col(dcc.Link('[LOGO]', href='/home', style={'font-size':25}), width=3),
                  dbc.Col(html.H2('Sidebar', style={'fontSize': 50}), width=6)
                  ], align="center", justify="start", style={'padding-top':'7%'}),
         html.Hr(),
-        dbc.Nav(
+        html.Div(
             [
-                dbc.Row([dbc.Col(X1, width='auto', lg=6),
-                         dbc.Col(X2, width='auto', lg=6)], justify='center'),
-                dbc.Row([dbc.Col(X3, width='auto', lg=6),
-                         dbc.Col(X4, width='auto', lg=6)], justify='center'),
-                dbc.Row([dbc.Col(X5, width='auto', lg=6),
-                         dbc.Col(X6, width='auto', lg=6)], justify='center'),
-                dbc.Row([dbc.Col(X7, width='auto', lg=6),
-                         dbc.Col(X8, width='auto', lg=6)], justify='center'),
-                dbc.Row([dbc.Col(X9, width='auto', lg=6),
-                         dbc.Col(X10, width='auto', lg=6)], justify='center'),
+                dbc.Row([dbc.Col(X1, sm=6),
+                         dbc.Col(X2, lg=6)], justify='center'),
+                dbc.Row([dbc.Col(X3, lg=6),
+                         dbc.Col(X4, lg=6)], justify='center'),
+                dbc.Row([dbc.Col(X5, lg=6),
+                         dbc.Col(X6, lg=6)], justify='center'),
+                dbc.Row([dbc.Col(X7, lg=6),
+                         dbc.Col(X8, lg=6)], justify='center'),
+                dbc.Row([dbc.Col(X9, lg=6),
+                         dbc.Col(X10, lg=6)], justify='center'),
             ],
-            navbar=False,
-            navbar_scroll=True,
-            vertical=True,
-            pills=True,
+
         ),
     ],
     style=SIDEBAR_STYLE,

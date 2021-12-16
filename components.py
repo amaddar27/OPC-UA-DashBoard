@@ -5,9 +5,8 @@ from dash import dcc, html
 from styles import *
 
 def bar(id):
-    chart = dbc.Card(
-        dbc.CardBody([dcc.Graph(id=id, config={'displayModeBar': False},figure={},)])
-    )
+    chart = dcc.Graph(id=id, config={'displayModeBar': False},figure={},)
+
     return chart
 # ----------------------------------MACHINES--------------------------------------------
 X1 = gen_card(name='X1', util=10)
